@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
+from dotenv import load_dotenv
+load_dotenv()
 
-from task.constants import API_KEY
+from task.constants import API_KEY,DEPLOYMENT_NAME
 from task.models.message import Message
 
 
@@ -11,7 +13,7 @@ class BaseClient(ABC):
         if not api_key or api_key.strip() == "":
             raise ValueError("API key cannot be null or empty")
         self._api_key = api_key
-        self._deployment_name= deployment_name
+        self._deployment_name= DEPLOYMENT_NAME
 
     @abstractmethod
     def get_completion(self, messages: list[Message]) -> Message:
